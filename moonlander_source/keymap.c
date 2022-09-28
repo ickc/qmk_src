@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_SPACE,       KC_LSHIFT,      KC_LGUI,                        KC_RGUI,        KC_RSHIFT,      KC_ENTER
   ),
   [1] = LAYOUT_moonlander(
-    KC_ESCAPE,      KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_DELETE,                                      KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         KC_F12,         
+    KC_ESCAPE,      KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_F6,                                          KC_DELETE,      KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         KC_F12,         
     KC_F13,         KC_F14,         KC_F15,         KC_F16,         KC_F17,         KC_F18,         KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_LBRACKET,    KC_RBRACKET,    KC_TRANSPARENT, KC_HOME,        
     KC_F19,         KC_F20,         KC_F21,         KC_F22,         KC_F23,         KC_F24,         KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_LCBR,        KC_RCBR,        KC_TRANSPARENT, KC_END,         
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_PGUP,        
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [2] = LAYOUT_moonlander(
-    AU_TOG,         KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,LCTL(KC_UP),    LGUI(KC_SPACE), KC_TRANSPARENT, KC_MEDIA_STOP,                                  KC_TRANSPARENT, KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,
+    AU_TOG,         KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,LCTL(KC_UP),    LGUI(KC_SPACE), KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_MEDIA_STOP,  KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,
     MU_TOG,         RGB_SPD,        RGB_SPI,        RGB_SLD,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     MU_MOD,         RGB_HUD,        RGB_HUI,        HSV_0_255_255,  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_MS_BTN1,     KC_MS_UP,       KC_MS_BTN2,     KC_TRANSPARENT, KC_TRANSPARENT, 
     MOON_LED_LEVEL, RGB_SAD,        RGB_SAI,        HSV_84_255_128, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    KC_MS_WH_UP,    KC_TRANSPARENT, 
@@ -105,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ENTER,       KC_RSHIFT,      KC_RGUI,                        KC_LGUI,        KC_LSHIFT,      KC_SPACE
   ),
   [5] = LAYOUT_moonlander(
-    KC_F12,         KC_F11,         KC_F10,         KC_F9,          KC_F8,          KC_F7,          KC_F6,                                          KC_DELETE,      KC_F5,          KC_F4,          KC_F3,          KC_F2,          KC_F1,          KC_ESCAPE,      
+    KC_F12,         KC_F11,         KC_F10,         KC_F9,          KC_F8,          KC_F7,          KC_DELETE,                                      KC_F6,          KC_F5,          KC_F4,          KC_F3,          KC_F2,          KC_F1,          KC_ESCAPE,      
     KC_HOME,        KC_TRANSPARENT, KC_RBRACKET,    KC_LBRACKET,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                                          KC_NO,          KC_F18,         KC_F17,         KC_F16,         KC_F15,         KC_F14,         KC_F13,         
     KC_END,         KC_TRANSPARENT, KC_RCBR,        KC_LCBR,        KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                                                                          KC_NO,          KC_F24,         KC_F23,         KC_F22,         KC_F21,         KC_F20,         KC_F19,         
     KC_PGUP,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -113,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [6] = LAYOUT_moonlander(
-    KC_AUDIO_VOL_UP,KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_MEDIA_NEXT_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_TRANSPARENT,                                 KC_MEDIA_STOP,  KC_TRANSPARENT, LGUI(KC_SPACE), LCTL(KC_UP),    KC_BRIGHTNESS_UP,KC_BRIGHTNESS_DOWN,AU_TOG,         
+    KC_AUDIO_VOL_UP,KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_MEDIA_NEXT_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_MEDIA_STOP,                                  KC_TRANSPARENT, KC_TRANSPARENT, LGUI(KC_SPACE), LCTL(KC_UP),    KC_BRIGHTNESS_UP,KC_BRIGHTNESS_DOWN,AU_TOG,         
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                                          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, RGB_SLD,        RGB_SPI,        RGB_SPD,        MU_TOG,         
     KC_TRANSPARENT, KC_TRANSPARENT, KC_MS_BTN2,     KC_MS_UP,       KC_MS_BTN1,     KC_TRANSPARENT, KC_NO,                                                                          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, HSV_0_255_255,  RGB_HUI,        RGB_HUD,        MU_MOD,         
     KC_TRANSPARENT, KC_MS_WH_UP,    KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, HSV_84_255_128, RGB_SAI,        RGB_SAD,        MOON_LED_LEVEL, 
