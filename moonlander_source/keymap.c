@@ -53,7 +53,20 @@ enum custom_keycodes {
   HSV_0_255_255,
   HSV_84_255_128,
   HSV_172_255_255,
+  KC_MISSION_CONTROL,
+  KC_SPOTLIGHT,
+  KC_DICTATION,
+  KC_DO_NOT_DISTURB,
+  KC_LOCK_SCREEN,
 };
+#define KC_MCTL KC_MISSION_CONTROL
+#define KC_SPLT KC_SPOTLIGHT
+#define KC_SIRI KC_DICTATION
+#define KC_DOND KC_DO_NOT_DISTURB
+#define KC_LOCK KC_LOCK_SCREEN
+
+#define HCS(report) host_consumer_send(record->event.pressed ? report : 0); return false
+#define HSS(report) host_system_send(record->event.pressed ? report : 0); return false
 
 
 enum tap_dance_codes {
@@ -80,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [2] = LAYOUT_moonlander(
     KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_F6,          MOON_LED_LEVEL,                                 KC_SYSTEM_POWER,KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         KC_F12,         
-    KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,LCTL(KC_UP),    LGUI(KC_SPACE), KC_TRANSPARENT, KC_TRANSPARENT, KC_PGUP,                                        KC_HOME,        KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,
+    KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,KC_MCTL,    KC_SPLT,        KC_SIRI,        KC_DOND,        KC_PGUP,                                        KC_HOME,        KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,
     RGB_SPI,        RGB_HUI,        KC_MS_BTN2,     KC_MS_UP,       KC_MS_BTN1,     RGB_SAI,        KC_PGDOWN,                                                                      KC_END,         RGB_VAI,        AU_TOG,         KC_UP,          HSV_0_255_255,  HSV_84_255_128, HSV_172_255_255,
     RGB_SPD,        RGB_HUD,        KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    RGB_SAD,                                        RGB_VAD,        KC_LEFT,        KC_DOWN,        KC_RIGHT,       MU_MOD,         MU_TOG,         
     TO(0),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, OSL(3),                                                                                                         OSL(3),         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -88,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [3] = LAYOUT_moonlander(
     KC_F12,         KC_F11,         KC_F10,         KC_F9,          KC_F8,          KC_F7,          KC_SYSTEM_POWER,                                MOON_LED_LEVEL, KC_F6,          KC_F5,          KC_F4,          KC_F3,          KC_F2,          KC_F1,          
-    KC_AUDIO_VOL_UP,KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_MEDIA_NEXT_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_HOME,                                        KC_PGUP,        KC_TRANSPARENT, KC_TRANSPARENT, LGUI(KC_SPACE), LCTL(KC_UP),    KC_BRIGHTNESS_UP,KC_BRIGHTNESS_DOWN,
+    KC_AUDIO_VOL_UP,KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_MEDIA_NEXT_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_HOME,                                        KC_PGUP,        KC_DOND, KC_SIRI, KC_SPLT, KC_MCTL,    KC_BRIGHTNESS_UP,KC_BRIGHTNESS_DOWN,
     HSV_172_255_255,HSV_84_255_128, HSV_0_255_255,  KC_UP,          AU_TOG,         RGB_VAI,        KC_END,                                                                         KC_PGDOWN,      RGB_SAI,        KC_MS_BTN1,     KC_MS_UP,       KC_MS_BTN2,     RGB_HUI,        RGB_SPI,        
     MU_TOG,         MU_MOD,         KC_LEFT,        KC_DOWN,        KC_RIGHT,       RGB_VAD,                                        RGB_SAD,        KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    RGB_HUD,        RGB_SPD,        
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, TO(0),          
@@ -122,6 +135,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgblight_sethsv(172,255,255);
       }
       return false;
+    case KC_MISSION_CONTROL:
+      HCS(0x29F);
+    case KC_SPOTLIGHT:
+      HCS(0x221);
+    case KC_DICTATION:
+      HCS(0xCF);
+    case KC_DO_NOT_DISTURB:
+      HSS(0x9B);
+    case KC_LOCK_SCREEN:
+      HCS(0x19E);
   }
   return true;
 }
