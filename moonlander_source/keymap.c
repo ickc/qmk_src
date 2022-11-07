@@ -50,9 +50,6 @@
 
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
-  HSV_0_255_255,
-  HSV_84_255_128,
-  HSV_172_255_255,
 };
 
 
@@ -81,16 +78,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [2] = LAYOUT_moonlander(
     KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_F6,          MOON_LED_LEVEL,                                 KC_SYSTEM_POWER,KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         KC_F12,         
     KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,LCTL(KC_UP),    LGUI(KC_SPACE), KC_TRANSPARENT, KC_TRANSPARENT, KC_PGUP,                                        KC_HOME,        KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,
-    RGB_SPI,        RGB_HUI,        KC_MS_BTN2,     KC_MS_UP,       KC_MS_BTN1,     RGB_SAI,        KC_PGDOWN,                                                                      KC_END,         RGB_VAI,        AU_TOG,         KC_UP,          HSV_0_255_255,  HSV_84_255_128, HSV_172_255_255,
-    RGB_SPD,        RGB_HUD,        KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    RGB_SAD,                                        RGB_VAD,        KC_LEFT,        KC_DOWN,        KC_RIGHT,       MU_MOD,         MU_TOG,         
+    RGB_SPI,        RGB_HUI,        KC_NO,          KC_UP,          KC_NO,          RGB_SAI,        KC_PGDOWN,                                                                      KC_END,         RGB_VAI,        KC_MS_BTN1,     KC_MS_UP,       KC_MS_BTN2,     KC_TRANSPARENT, AU_TOG,         
+    RGB_SPD,        RGB_HUD,        KC_LEFT,        KC_DOWN,        KC_RIGHT,       RGB_SAD,                                        RGB_VAD,        KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    MU_MOD,         MU_TOG,         
     TO(0),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, OSL(3),                                                                                                         OSL(3),         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     TOGGLE_LAYER_COLOR,RGB_TOG,        KC_TRANSPARENT,                 KC_TRANSPARENT, RGB_SLD,        RGB_MOD
   ),
   [3] = LAYOUT_moonlander(
     KC_F12,         KC_F11,         KC_F10,         KC_F9,          KC_F8,          KC_F7,          KC_SYSTEM_POWER,                                MOON_LED_LEVEL, KC_F6,          KC_F5,          KC_F4,          KC_F3,          KC_F2,          KC_F1,          
     KC_AUDIO_VOL_UP,KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_MEDIA_NEXT_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_HOME,                                        KC_PGUP,        KC_TRANSPARENT, KC_TRANSPARENT, LGUI(KC_SPACE), LCTL(KC_UP),    KC_BRIGHTNESS_UP,KC_BRIGHTNESS_DOWN,
-    HSV_172_255_255,HSV_84_255_128, HSV_0_255_255,  KC_UP,          AU_TOG,         RGB_VAI,        KC_END,                                                                         KC_PGDOWN,      RGB_SAI,        KC_MS_BTN1,     KC_MS_UP,       KC_MS_BTN2,     RGB_HUI,        RGB_SPI,        
-    MU_TOG,         MU_MOD,         KC_LEFT,        KC_DOWN,        KC_RIGHT,       RGB_VAD,                                        RGB_SAD,        KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    RGB_HUD,        RGB_SPD,        
+    AU_TOG,         KC_TRANSPARENT, KC_MS_BTN2,     KC_MS_UP,       KC_MS_BTN1,     RGB_VAI,        KC_END,                                                                         KC_PGDOWN,      RGB_SAI,        KC_NO,          KC_UP,          KC_NO,          RGB_HUI,        RGB_SPI,        
+    MU_TOG,         MU_MOD,         KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    RGB_VAD,                                        RGB_SAD,        KC_LEFT,        KC_DOWN,        KC_RIGHT,       RGB_HUD,        RGB_SPD,        
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, TO(0),          
     RGB_MOD,        RGB_SLD,        KC_TRANSPARENT,                 KC_TRANSPARENT, RGB_TOG,        TOGGLE_LAYER_COLOR
   ),
@@ -102,24 +99,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RGB_SLD:
       if (record->event.pressed) {
         rgblight_mode(1);
-      }
-      return false;
-    case HSV_0_255_255:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(0,255,255);
-      }
-      return false;
-    case HSV_84_255_128:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(84,255,128);
-      }
-      return false;
-    case HSV_172_255_255:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(172,255,255);
       }
       return false;
   }
