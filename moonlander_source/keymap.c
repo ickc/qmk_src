@@ -54,13 +54,11 @@ enum custom_keycodes {
   KC_SPOTLIGHT,
   KC_DICTATION,
   KC_DO_NOT_DISTURB,
-  KC_LOCK_SCREEN,
 };
 #define KC_MCTL KC_MISSION_CONTROL
 #define KC_SPLT KC_SPOTLIGHT
 #define KC_SIRI KC_DICTATION
 #define KC_DOND KC_DO_NOT_DISTURB
-#define KC_LOCK KC_LOCK_SCREEN
 
 #define HCS(report) host_consumer_send(record->event.pressed ? report : 0); return false
 #define HSS(report) host_system_send(record->event.pressed ? report : 0); return false
@@ -118,8 +116,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       HCS(0xCF);
     case KC_DO_NOT_DISTURB:
       HSS(0x9B);
-    case KC_LOCK_SCREEN:
-      HCS(0x19E);
   }
   return true;
 }
