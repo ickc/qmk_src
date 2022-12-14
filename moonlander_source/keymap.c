@@ -50,18 +50,11 @@
 
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
-  KC_MISSION_CONTROL,
-  KC_SPOTLIGHT,
-  KC_DICTATION,
-  KC_DO_NOT_DISTURB,
+  MAC_MISSION_CONTROL,
+  MAC_SPOTLIGHT,
+  MAC_SIRI,
+  MAC_DND,
 };
-#define KC_MCTL KC_MISSION_CONTROL
-#define KC_SPLT KC_SPOTLIGHT
-#define KC_SIRI KC_DICTATION
-#define KC_DOND KC_DO_NOT_DISTURB
-
-#define HCS(report) host_consumer_send(record->event.pressed ? report : 0); return false
-#define HSS(report) host_system_send(record->event.pressed ? report : 0); return false
 
 
 
@@ -84,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [2] = LAYOUT_moonlander(
     KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_F6,          MOON_LED_LEVEL,                                 KC_SYSTEM_POWER,KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         KC_F12,         
-    KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,KC_MCTL,    KC_SPLT,        KC_SIRI,        KC_DOND,        KC_PGUP,                                        KC_HOME,        KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,
+    KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,MAC_MISSION_CONTROL,MAC_SPOTLIGHT,  MAC_SIRI,       MAC_DND,        KC_PGUP,                                        KC_HOME,        KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,
     RGB_SPI,        RGB_HUI,        KC_NO,          KC_UP,          KC_NO,          RGB_SAI,        KC_PGDOWN,                                                                      KC_END,         RGB_VAI,        KC_MS_BTN1,     KC_MS_UP,       KC_MS_BTN2,     KC_TRANSPARENT, AU_TOG,         
     RGB_SPD,        RGB_HUD,        KC_LEFT,        KC_DOWN,        KC_RIGHT,       RGB_SAD,                                        RGB_VAD,        KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    MU_MOD,         MU_TOG,         
     TO(0),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, OSL(3),                                                                                                         OSL(3),         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -92,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [3] = LAYOUT_moonlander(
     KC_F12,         KC_F11,         KC_F10,         KC_F9,          KC_F8,          KC_F7,          KC_SYSTEM_POWER,                                MOON_LED_LEVEL, KC_F6,          KC_F5,          KC_F4,          KC_F3,          KC_F2,          KC_F1,          
-    KC_AUDIO_VOL_UP,KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_MEDIA_NEXT_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_HOME,                                        KC_PGUP,        KC_DOND, KC_SIRI, KC_SPLT, KC_MCTL,    KC_BRIGHTNESS_UP,KC_BRIGHTNESS_DOWN,
+    KC_AUDIO_VOL_UP,KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_MEDIA_NEXT_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_HOME,                                        KC_PGUP,        MAC_DND,        MAC_SIRI,       MAC_SPOTLIGHT,  MAC_MISSION_CONTROL,KC_BRIGHTNESS_UP,KC_BRIGHTNESS_DOWN,
     AU_TOG,         KC_TRANSPARENT, KC_MS_BTN2,     KC_MS_UP,       KC_MS_BTN1,     RGB_VAI,        KC_END,                                                                         KC_PGDOWN,      RGB_SAI,        KC_NO,          KC_UP,          KC_NO,          RGB_HUI,        RGB_SPI,        
     MU_TOG,         MU_MOD,         KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    RGB_VAD,                                        RGB_SAD,        KC_LEFT,        KC_DOWN,        KC_RIGHT,       RGB_HUD,        RGB_SPD,        
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, TO(0),          
@@ -103,19 +96,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case MAC_MISSION_CONTROL:
+      HCS(0x29F);
+    case MAC_SPOTLIGHT:
+      HCS(0x221);
+    case MAC_SIRI:
+      HCS(0xCF);
+    case MAC_DND:
+      HSS(0x9B);
+
     case RGB_SLD:
       if (record->event.pressed) {
         rgblight_mode(1);
       }
       return false;
-    case KC_MISSION_CONTROL:
-      HCS(0x29F);
-    case KC_SPOTLIGHT:
-      HCS(0x221);
-    case KC_DICTATION:
-      HCS(0xCF);
-    case KC_DO_NOT_DISTURB:
-      HSS(0x9B);
   }
   return true;
 }
